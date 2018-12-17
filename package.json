@@ -1,0 +1,33 @@
+{
+  "name": "with-typescript",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "docz": "docz dev",
+    "dovz:build": "docz build",
+    "type-check": "tsc"
+  },
+  "dependencies": {
+    "@zeit/next-typescript": "^1.1.1",
+    "docz-plugin-css": "^0.11.0",
+    "docz-theme-default": "^0.12.17",
+    "next": "latest",
+    "normalize.css": "^8.0.1",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "sanitize.css": "^8.0.0",
+    "styled-components": "^4.1.2"
+  },
+  "devDependencies": {
+    "@types/next": "^7.0.1",
+    "@types/react": "^16.4.16",
+    "@types/react-dom": "16.0.8",
+    "@types/styled-components": "^4.1.4",
+    "docz": "^0.12.17",
+    "typescript": "^3.2.2",
+    "typescript-styled-plugin": "^0.13.0"
+  },
+  "license": "ISC"
+}
