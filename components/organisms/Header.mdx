@@ -6,13 +6,22 @@ menu: Organisms
 import { Header } from "./Header";
 import { Playground, PropsTable } from "docz";
 
-Button is so 8bit. Inspired by NES. Here is button implementation with color.
+## Header before Login
+
+Before login, header showing, login and register button with it's modal.
 
 <Playground>
   <Header />
-  <br />
-  <br />
-  <Header isLogin />
 </Playground>
+
+## Header after Login
+
+After login, header showing user avatar and notification.
+
+<Playground>
+  <Header isLogin user={{ username: "damn" }} />
+</Playground>
+
+## Header Properties
 
 <PropsTable of={Header} />

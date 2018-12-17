@@ -32,9 +32,9 @@ const Wrapper = styled(SCButton)`
   padding: 4px 12px 3px;
   cursor: pointer;
   box-shadow: 3px 3px 0 ${props => props.theme.fontColor};
-  margin-right: 12px;
+  margin-right: ${props => (props.isLast ? 0 : 12)}px;
   margin-bottom: ${props => (props.isBottom ? 0 : 12)}px;
-  font-size: 16px;
+  font-size: 14px;
 
   &:hover {
     top: -1px;

@@ -8,6 +8,8 @@ export interface ThemeInterface {
   bgPage: string;
   fontColor: string;
 
+  colorRed: string;
+
   fontFamilySansSerif: string;
   fontFamilyMonospace: string;
 
@@ -23,6 +25,8 @@ export const theme: ThemeInterface = {
 
   bgPage: "#fff",
   fontColor: "#111",
+
+  colorRed: "#DE350B",
 
   fontFamilySansSerif:
     '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;',
