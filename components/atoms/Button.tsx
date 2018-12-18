@@ -26,6 +26,7 @@ const Wrapper = styled(SCButton)`
   /* color: ${props => props.theme.fontColor}; */
   border: none;
   font-family: ${props => props.theme.fontFamilyMonospace};
+  color: ${props => props.theme.fontColor};
   font-weight: bold;
   text-transform: uppercase;
   outline: none;
@@ -35,6 +36,8 @@ const Wrapper = styled(SCButton)`
   margin-right: ${props => (props.isLast ? 0 : 12)}px;
   margin-bottom: ${props => (props.isBottom ? 0 : 12)}px;
   font-size: 14px;
+  border: solid 2px ${props => props.theme.fontColor};
+  border-radius: 2px;
 
   &:hover {
     top: -1px;

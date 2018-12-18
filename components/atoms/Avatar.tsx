@@ -16,19 +16,11 @@ const Wrapper = styled(SCAvatar)`
   width: 36px;
   height: 36px;
   background: ${props => props.theme.bgGrey};
-  box-shadow: 3px 3px 0 ${props => props.theme.fontColor};
+  /* box-shadow: 3px 3px 0 ${props => props.theme.fontColor}; */
   margin-right: ${props => (props.isLast ? 0 : 12)}px;
   margin-bottom: ${props => (props.isBottom ? 0 : 12)}px;
-
-  &:hover {
-    top: -1px;
-    left: -1px;
-    box-shadow: 4px 4px 0 ${props => props.theme.fontColor};
-  }
-
-  &:active {
-    top: 1px;
-  }
+  border: solid 2px ${props => props.theme.fontColor};
+  border-radius: 18px;
 `;
 
 export const Avatar = (props: AvatarProps) => {

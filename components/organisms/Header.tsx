@@ -7,7 +7,9 @@ import LogoSrc from "../../static/devlover-logo.svg";
 import { Avatar } from "../atoms/Avatar";
 export interface HeaderProps {
   isLogin?: boolean;
-  user?: object;
+  user?: {
+    username: string;
+  };
   children?: React.ReactChild | React.ReactChild[];
 }
 
@@ -18,12 +20,14 @@ interface HeaderState {
 
 const Wrapper = styled.header`
   width: 100%;
+  background: ${props => props.theme.bgGrey};
   border-bottom: solid 1px ${props => props.theme.bgGrey};
 `;
 const Container = styled.div`
   max-width: ${props => props.theme.containerWidth}px;
   margin: 0 auto;
-  padding: 10px;
+  height: 50px;
+  padding: 0 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -33,9 +37,9 @@ const Section = styled.div`
   display: flex;
 `;
 const Logo = styled.img`
-  width: 36px;
-  height: 32px;
-  object-fit: cover;
+  width: 60px;
+  height: 40px;
+  object-fit: contain;
 `;
 const LogoText = styled.h1`
   margin: 0 10px;
@@ -53,10 +57,7 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
     return (
       <>
         <Button background="green" isBottom>
-          Login
-        </Button>
-        <Button background="red" isBottom isLast>
-          Register
+          Buat artikel
         </Button>
       </>
     );
