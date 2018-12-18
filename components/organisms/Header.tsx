@@ -5,6 +5,9 @@ import Link from "next/link";
 
 import LogoSrc from "../../static/devlover-logo.svg";
 import { Avatar } from "../atoms/Avatar";
+
+import { Pencil } from "styled-icons/boxicons-solid/Pencil";
+
 export interface HeaderProps {
   isLogin?: boolean;
   user?: {
@@ -57,7 +60,8 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
     return (
       <>
         <Button background="green" isBottom>
-          Buat artikel
+          <Pencil className="icon" size={16} />
+          Buat post
         </Button>
       </>
     );

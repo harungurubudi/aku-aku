@@ -1,28 +1,20 @@
 import * as React from "react";
 import styled from "../styledComponents";
 import { ThemeInterface } from "../theme";
+import { getBackground } from "./getBackground";
 
 export interface ButtonProps {
   background?: "red" | "yellow" | "blue" | "green";
-  children: React.ReactChild;
+  children: React.ReactChild | React.ReactChild[];
   isLast?: boolean;
   isBottom?: boolean;
 }
-
-const getButtonBackground = (background?: string, theme?: ThemeInterface) => {
-  if (background) {
-    return theme[
-      `bg${background.charAt(0).toUpperCase() + background.slice(1)}`
-    ];
-  }
-  return theme.bgGrey;
-};
 
 const SCButton = styled.button<ButtonProps>``;
 const Wrapper = styled(SCButton)`
   position: relative;
   background: ${(props: { background: string; theme: ThemeInterface }) =>
-    getButtonBackground(props.background, props.theme)};
+    getBackground(props.background, props.theme)};
   /* color: ${props => props.theme.fontColor}; */
   border: none;
   font-family: ${props => props.theme.fontFamilyMonospace};
@@ -38,6 +30,10 @@ const Wrapper = styled(SCButton)`
   font-size: 14px;
   border: solid 2px ${props => props.theme.fontColor};
   border-radius: 2px;
+
+  .icon {
+    margin-right: 5px;
+  }
 
   &:hover {
     top: -1px;
