@@ -15,7 +15,6 @@ interface MyDocumentProps {
 export default class MyDocument extends Document<MyDocumentProps> {
   static getInitialProps({ renderPage }: NextDocumentContext) {
     const sheet = new ServerStyleSheet();
-    // const page = {};
     const page = renderPage(App => props =>
       sheet.collectStyles(<App {...props} />)
     );

@@ -27,6 +27,7 @@ export const Avatar = (props: AvatarProps) => {
   const imageProvider = `https://api.adorable.io/avatars/${
     props.size ? props.size : 30
   }/${props.username}.png`;
+
   return (
     <Wrapper
       src={props.src ? props.src : imageProvider}
