@@ -18,7 +18,6 @@ export default class MyDocument extends Document<MyDocumentProps> {
     const page = renderPage(App => props =>
       sheet.collectStyles(<App {...props} />)
     );
-    console.log(page);
     const styleTags = sheet.getStyleElement();
     return { ...page, styleTags };
   }

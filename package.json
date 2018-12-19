@@ -2,9 +2,9 @@
   "name": "yamaha",
   "version": "1.0.0",
   "scripts": {
-    "dev": "next",
+    "dev": "node server",
     "build": "next build",
-    "start": "next start",
+    "start": "NODE_ENV=production node server",
     "docz": "docz dev",
     "docz-build": "docz build",
     "type-check": "tsc"
@@ -16,6 +16,7 @@
     "dotenv": "^6.2.0",
     "dotenv-webpack": "^1.5.7",
     "next": "latest",
+    "next-routes": "^1.4.2",
     "normalize.css": "^8.0.1",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",

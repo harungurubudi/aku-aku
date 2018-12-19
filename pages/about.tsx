@@ -1,13 +1,20 @@
-import Link from "next/link";
-import Layout from "../components/Layout";
+import * as React from "react";
 
-export default () => (
-  <Layout title="About | Next.js + TypeScript Example">
-    <p>This is the about page</p>
-    <p>
-      <Link href="/">
-        <a>Go home</a>
-      </Link>
-    </p>
-  </Layout>
-);
+export interface AboutPageProps {
+  query: {
+    slug: string;
+  };
+}
+
+export default class AboutPage extends React.Component<AboutPageProps, {}> {
+  static async getInitialProps({ query, res }) {
+    return { query };
+  }
+  public render() {
+    return (
+      <div>
+        <h1>About, query: q {this.props.query.slug}</h1>
+      </div>
+    );
+  }
+}
