@@ -9,9 +9,8 @@ steps:
   - --keyring=gcb
   - --key=gcb
 - name: node:10.14.2
-  entrypoint: npm
-  args: ['install']
-- name: alpine:3.8
   args: ['sh', '-x', 'build/build.sh']
+- name: alpine:3.8
+  args: ['sh', '-x', 'build/deploy.sh']
   env:
     - 'STAGING_HOST=$_STAGING_HOST'
