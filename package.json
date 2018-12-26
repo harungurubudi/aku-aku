@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@zeit/next-typescript": "^1.1.1",
+    "codemirror": "^5.42.2",
     "docz-plugin-css": "^0.11.0",
     "docz-theme-default": "^0.12.17",
     "dotenv": "^6.2.0",
@@ -19,6 +20,7 @@
     "next-routes": "^1.4.2",
     "normalize.css": "^8.0.1",
     "react": "^16.5.2",
+    "react-codemirror2": "^5.1.0",
     "react-dom": "^16.5.2",
     "react-modal": "^3.7.1",
     "remark": "^10.0.1",
@@ -27,6 +29,7 @@
     "styled-icons": "^5.5.0"
   },
   "devDependencies": {
+    "@types/codemirror": "0.0.71",
     "@types/next": "^7.0.1",
     "@types/react": "^16.4.16",
     "@types/react-dom": "16.0.8",

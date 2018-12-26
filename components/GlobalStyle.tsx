@@ -8,4 +8,11 @@ export const GlobalStyle = createGlobalStyle`
     text-decoration: none;
     color: inherit;
   }
+  .editor {
+    .CodeMirror {
+      padding: 20px;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+  }
 `;
