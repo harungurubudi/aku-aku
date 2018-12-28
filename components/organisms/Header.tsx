@@ -23,8 +23,8 @@ interface HeaderState {
 
 const Wrapper = styled.header`
   width: 100%;
-  background: ${props => props.theme.bgGrey};
-  border-bottom: solid 1px ${props => props.theme.bgGrey};
+  background: ${props => props.theme.black};
+  border-bottom: solid 1px ${props => props.theme.grey};
 `;
 const Container = styled.div`
   max-width: ${props => props.theme.containerWidth}px;
@@ -49,9 +49,9 @@ const LogoText = styled.h1`
   font-family: ${props => props.theme.fontFamilyMonospace};
   font-weight: bold;
   font-size: 20px;
-
+  color: ${props => props.theme.white};
   span {
-    color: ${props => props.theme.colorRed};
+    color: ${props => props.theme.red};
   }
 `;
 
@@ -59,7 +59,7 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
   renderBeforeLogin() {
     return (
       <>
-        <Button background="green" isBottom>
+        <Button iconColor="green" isInvert isBottom>
           <Pencil className="icon" size={16} />
           Buat post
         </Button>

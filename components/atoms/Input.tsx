@@ -19,9 +19,11 @@ const Wrapper = styled(SCInput)`
   padding: 5px 10px;
   padding-top: 16px;
   outline: none;
-  border: solid 2px;
+  border: solid 2px ${props => props.theme.black};
   position: relative;
-  background: ${(props: { background: string; theme: ThemeInterface }) =>
+  border-radius: 4px;
+  /* background: ${props => props.theme.grey}; */
+  border-color: ${(props: { background: string; theme: ThemeInterface }) =>
     getBackground(props.background, props.theme)};
   font-size: 16px;
   margin-bottom: 16px;
@@ -37,7 +39,7 @@ const Label = styled.label`
   font-weight: bold;
   text-transform: uppercase;
   padding: 4px 12px;
-  color: ${props => props.theme.fontColor};
+  color: ${props => props.theme.fontColor()};
 `;
 
 export const Input = (props: InputProps) => {

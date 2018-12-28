@@ -1,14 +1,15 @@
 export interface ThemeInterface {
-  bgRed: string;
-  bgBlue: string;
-  bgYellow: string;
-  bgGreen: string;
-  bgGrey: string;
+  red: string;
+  blue: string;
+  yellow: string;
+  green: string;
+  grey: string;
+  pink: string;
+  white: string;
+  black: string;
 
-  bgPage: string;
-  fontColor: string;
-
-  colorRed: string;
+  background: (isDarkMode?: boolean) => string;
+  fontColor: (isDarkMode?: boolean) => string;
 
   fontFamilySansSerif: string;
   fontFamilyMonospace: string;
@@ -17,16 +18,21 @@ export interface ThemeInterface {
 }
 
 export const theme: ThemeInterface = {
-  bgRed: "#FFBDAD",
-  bgBlue: "#B3D4FF",
-  bgYellow: "#FFF0B3",
-  bgGreen: "#ABF5D1",
-  bgGrey: "#DFE1E6",
+  red: "#ef596f",
+  blue: "#52adf2",
+  yellow: "#d8985f",
+  green: "#89ca78",
+  grey: "#abb2bf",
+  pink: "#d55fde",
+  white: "#fff",
+  black: "#282c34",
 
-  bgPage: "#fff",
-  fontColor: "#111",
-
-  colorRed: "#DE350B",
+  background: isDarkMode => {
+    return isDarkMode ? "#282c34" : "#fff";
+  },
+  fontColor: isDarkMode => {
+    return isDarkMode ? "#fff" : "#282c34";
+  },
 
   fontFamilySansSerif:
     '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;',
