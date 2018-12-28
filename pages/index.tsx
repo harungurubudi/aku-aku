@@ -5,24 +5,31 @@ import { Container } from "../components/atoms/Container";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { countIncrement, countDecrement } from "../store";
+import GitHubLogin from "react-github-login";
 
 import * as React from "react";
-import { NextAppContext } from "next/app";
+import { InitialProps } from "../types";
+// import { NextAppContext } from "next/app";
 
 export interface IndexProps {
   count: number;
 }
 
 class Index extends React.Component<IndexProps, {}> {
-  // tslint:disable-next-line:typedef
-  static async getInitialProps(ctx) {
-    if (ctx.isServer) {
-      await ctx.store.dispatch(countIncrement());
+  static async getInitialProps({ isServer, store }: InitialProps) {
+    if (isServer) {
+      await store.dispatch(countIncrement());
     }
     return {};
   }
+  onSuccess = response => {
+    console.log(response);
+  };
+  onFailure = response => {
+    throw response;
+    console.error(response);
+  };
   public render() {
-    console.log(this.props);
     return (
       <div>
         <Header />
@@ -38,6 +45,12 @@ class Index extends React.Component<IndexProps, {}> {
           <Button fontColor="pink">Login</Button>
           <h2>{process.env.TEST}</h2>
           <h1>{this.props.count}</h1>
+          <GitHubLogin
+            clientId={process.env.GITHUB_CLIENT_ID}
+            redirectUri={process.env.GITHUB_REDIRECT_URI}
+            onSuccess={this.onSuccess}
+            onFailure={this.onFailure}
+          />
         </Container>
       </div>
     );

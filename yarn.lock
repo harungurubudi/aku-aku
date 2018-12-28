@@ -9496,6 +9496,11 @@ react-feather@^1.1.4:
   resolved "https://registry.yarnpkg.com/react-feather/-/react-feather-1.1.4.tgz#d0143da95f9d52843cf13a553091573a7c617897"
   integrity sha512-Odke3WUl00+a2scGQKlep4m+qDESl/x+PsTRB3v6fAV/2dteF4EaRjqhX8h7HM3mU3V3v0xGTv8Z5S26bpQ5PQ==
 
+react-github-login@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/react-github-login/-/react-github-login-1.0.3.tgz#e3fdc29c1162ecc0704d9fe6096c69d6f53315e7"
+  integrity sha1-4/3CnBFi7MBwTZ/mCWxp1vUzFec=
+
 react-hot-loader@4.3.6:
   version "4.3.6"
   resolved "https://registry.yarnpkg.com/react-hot-loader/-/react-hot-loader-4.3.6.tgz#26e1491f08daf2bad99d141b1927c9faadef2fb4"
