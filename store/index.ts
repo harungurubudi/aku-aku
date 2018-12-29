@@ -1,57 +1,27 @@
-import {
-  createStore,
-  applyMiddleware,
-  Action,
-  Dispatch,
-  Reducer,
-  DeepPartial
-} from "redux";
+import { createStore, applyMiddleware, combineReducers } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunkMiddleware from "redux-thunk";
 
-interface State {
-  count: number;
+import * as Counter from "./counter";
+import * as App from "./app";
+
+export interface RootState {
+  counter: Counter.State;
+  app: App.State;
 }
-const exampleInitialState: DeepPartial<State> = {
-  count: 0
+export const rootInitialState = {
+  counter: Counter.initialState,
+  app: App.initialState
 };
 
-export const actionTypes = {
-  INCREMENT: "INCREMENT",
-  DECREMENT: "DECREMENT"
-};
+export const rootReducer = combineReducers({
+  counter: Counter.reducer,
+  app: App.reducer
+});
 
-// REDUCERS
-export const reducer: Reducer = (
-  state: DeepPartial<State> = exampleInitialState,
-  action: Action
-) => {
-  switch (action.type) {
-    case actionTypes.INCREMENT:
-      return {
-        ...state,
-        count: state.count + 1
-      };
-    case actionTypes.DECREMENT:
-      return {
-        ...state,
-        count: state.count - 1
-      };
-    default:
-      return state;
-  }
-};
-
-export const countIncrement = () => (dispatch: Dispatch) => {
-  return dispatch({ type: actionTypes.INCREMENT });
-};
-export const countDecrement = () => (dispatch: Dispatch) => {
-  return dispatch({ type: actionTypes.DECREMENT });
-};
-
-export const initStore = (initialState = exampleInitialState) => {
+export const initStore = (initialState = rootInitialState) => {
   return createStore(
-    reducer,
+    rootReducer,
     initialState,
     composeWithDevTools(applyMiddleware(thunkMiddleware))
   );

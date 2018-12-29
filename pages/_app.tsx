@@ -26,16 +26,18 @@ export default withRedux(initStore)(
 
     render() {
       const { Component, pageProps, store } = this.props;
+      const state = store.getState();
+      console.log(state);
       return (
         <Container>
-          <ThemeProvider theme={theme}>
-            <div>
-              <GlobalStyle />
-              <Provider store={store}>
+          <Provider store={store}>
+            <ThemeProvider theme={theme}>
+              <div>
+                <GlobalStyle />
                 <Component {...pageProps} />
-              </Provider>
-            </div>
-          </ThemeProvider>
+              </div>
+            </ThemeProvider>
+          </Provider>
         </Container>
       );
     }

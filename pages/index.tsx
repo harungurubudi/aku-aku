@@ -1,24 +1,29 @@
-import { Header } from "../components/organisms/Header";
-import { Input } from "../components/atoms/Input";
+import * as React from "react";
+import GitHubLogin from "react-github-login";
+import { connect } from "react-redux";
+import { bindActionCreators, Action } from "redux";
 import { Button } from "../components/atoms/Button";
 import { Container } from "../components/atoms/Container";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { countIncrement, countDecrement } from "../store";
-import GitHubLogin from "react-github-login";
-
-import * as React from "react";
+import { Header } from "../components/organisms/Header";
+import { RootState } from "../store";
+import { appToggleDarkMode } from "../store/app";
+import { counterIncrement, counterIncrementAsync } from "../store/counter";
 import { InitialProps } from "../types";
+
 // import { NextAppContext } from "next/app";
 
 export interface IndexProps {
-  count: number;
+  counter: number;
+  isDarkMode: boolean;
+  counterIncrement: () => void;
+  counterIncrementAsync: () => void;
+  appToggleDarkMode: () => void;
 }
 
 class Index extends React.Component<IndexProps, {}> {
   static async getInitialProps({ isServer, store }: InitialProps) {
     if (isServer) {
-      await store.dispatch(countIncrement());
+      await store.dispatch(counterIncrement());
     }
     return {};
   }
@@ -27,46 +32,47 @@ class Index extends React.Component<IndexProps, {}> {
   };
   onFailure = response => {
     throw response;
-    console.error(response);
   };
   public render() {
     return (
       <div>
         <Header />
         <Container>
-          <Input
-            label="Username"
-            placeholder="bukan nama asli"
-            background="yellow"
-          />
-          <br />
-          <Input label="password" placeholder="rahasia" background="yellow" />
-          <br />
           <Button fontColor="pink">Login</Button>
           <h2>{process.env.TEST}</h2>
-          <h1>{this.props.count}</h1>
+          <h1>{this.props.counter}</h1>
           <GitHubLogin
             clientId={process.env.GITHUB_CLIENT_ID}
             redirectUri={process.env.GITHUB_REDIRECT_URI}
             onSuccess={this.onSuccess}
             onFailure={this.onFailure}
           />
+          <button onClick={() => this.props.counterIncrementAsync()}>
+            inc async
+          </button>
+          {this.props.isDarkMode ? "darkmode" : "lightmode"}
+          <br />
+          <Button onClick={() => this.props.appToggleDarkMode()}>
+            Toggle dark mode
+          </Button>
         </Container>
       </div>
     );
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state: RootState) => {
   return {
-    count: state.count
+    counter: state.counter.count,
+    isDarkMode: state.app.isDarkMode
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    countIncrement: bindActionCreators(countIncrement, dispatch),
-    countDecrement: bindActionCreators(countDecrement, dispatch)
+    counterIncrement: bindActionCreators(counterIncrement, dispatch),
+    counterIncrementAsync: bindActionCreators(counterIncrementAsync, dispatch),
+    appToggleDarkMode: bindActionCreators(appToggleDarkMode, dispatch)
   };
 };
 export default connect(

@@ -1,10 +1,9 @@
 import * as React from "react";
 import styled from "../styledComponents";
-import { ThemeInterface } from "../theme";
 import { getFontColor } from "./getBackground";
 
-export interface ButtonProps {
-  children: React.ReactChild | React.ReactChild[];
+export interface ButtonProps extends React.DOMAttributes<HTMLButtonElement> {
+  // children: React.ReactChild | React.ReactChild[];
   fontColor?: "red" | "yellow" | "blue" | "green" | "pink" | "grey" | "black";
   iconColor?: "red" | "yellow" | "blue" | "green" | "pink" | "grey" | "black";
   isInvert?: boolean;
@@ -60,15 +59,5 @@ const Wrapper = styled(SCButton)`
 `;
 
 export const Button = (props: ButtonProps) => {
-  return (
-    <Wrapper
-      fontColor={props.fontColor}
-      iconColor={props.iconColor}
-      isInvert={props.isInvert}
-      isLast={props.isLast}
-      isBottom={props.isBottom}
-    >
-      {props.children}
-    </Wrapper>
-  );
+  return <Wrapper {...props} />;
 };
