@@ -8,6 +8,7 @@ ssh -i .ssh/id_rsa -o StrictHostKeyChecking=no bejo@$STAGING_HOST <<EOF
 
     rm -f ~/webapp/current
     ln -s ~/webapp/releases/$timestamp ~/webapp/current
+    cp ~/webapp/env ~/webapp/current/.env
     sudo systemctl restart webapp.service
 
     cd ~/webapp/releases
