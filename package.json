@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@zeit/next-typescript": "^1.1.1",
+    "chroma-js": "^2.0.2",
     "codemirror": "^5.42.2",
     "docz-plugin-css": "^0.11.0",
     "docz-theme-default": "^0.12.17",
@@ -35,6 +36,7 @@
     "styled-icons": "^5.5.0"
   },
   "devDependencies": {
+    "@types/chroma-js": "^1.4.1",
     "@types/codemirror": "0.0.71",
     "@types/next": "^7.0.1",
     "@types/next-redux-wrapper": "^2.0.2",

@@ -9,9 +9,8 @@ import { RootState } from "../store";
 import { appToggleDarkMode } from "../store/app";
 import { counterIncrement, counterIncrementAsync } from "../store/counter";
 import { InitialProps } from "../types";
-
-// import { NextAppContext } from "next/app";
-
+import routes from "../routes";
+const Link = routes.Link;
 export interface IndexProps {
   counter: number;
   isDarkMode: boolean;
@@ -42,19 +41,27 @@ class Index extends React.Component<IndexProps, {}> {
           <h2>{process.env.TEST}</h2>
           <h1>{this.props.counter}</h1>
           <GitHubLogin
+            className="github-button"
             clientId={process.env.GITHUB_CLIENT_ID}
             redirectUri={process.env.GITHUB_REDIRECT_URI}
             onSuccess={this.onSuccess}
             onFailure={this.onFailure}
           />
-          <button onClick={() => this.props.counterIncrementAsync()}>
+          <br />
+          <Button onClick={() => this.props.counterIncrementAsync()}>
             inc async
-          </button>
-          {this.props.isDarkMode ? "darkmode" : "lightmode"}
+          </Button>
+          <h2>{this.props.isDarkMode ? "darkmode" : "lightmode"}</h2>
           <br />
           <Button onClick={() => this.props.appToggleDarkMode()}>
             Toggle dark mode
           </Button>
+          <br />
+          <Link to="/editor">
+            <a>
+              <Button>sneak peek editor</Button>
+            </a>
+          </Link>
         </Container>
       </div>
     );

@@ -1,48 +1,95 @@
 import { Controlled as CodeMirror } from "react-codemirror2";
 
 import * as React from "react";
+import { Header } from "../components/organisms/Header";
+
 import "codemirror/lib/codemirror.css";
 
 if (process.browser) {
   require("codemirror/mode/gfm/gfm");
   require("codemirror/mode/jsx/jsx");
+  require("codemirror/mode/go/go");
 }
 
 interface EditorProps {}
 interface EditorState {
   value: string;
+  codeBlockLanguages: string[];
 }
 
-const availableLanguage = ["jsx"];
+const availableLanguages = ["jsx", "go"];
 
+const initialValue = `
+This is markdown title
+====
+
+# with heading
+
+Hello guys kembali dengan saya disini
+ini adalah **bold**, _italic_ ~~coret~~
+
+\`\`\`jsx
+import * as React from "react";
+
+const Component = (props) => {
+  return <div>Hello {props.world}</div>
+}
+\`\`\`
+`;
 export default class Editor extends React.Component<EditorProps, EditorState> {
   state = {
-    value: "",
-    codeBlockLanguage: []
+    value: initialValue,
+    codeBlockLanguages: []
   };
 
-  handleChangeValue = value => {
-    const lang = value.match(/```[a-z]*\n[\s\S]*?\n```/g);
-    console.log(lang);
+  // private checkLangList = val => {
+  //   const langMatch = val.match(/```[a-z]*\n[\s\S]*?\n```/g);
+  //   if (langMatch) {
+  //     const { codeBlockLanguages } = this.state;
+  //     langMatch.forEach((item: string) => {
+  //       const foundLang = item.split("\n")[0].split("```")[1];
+  //       let found = false;
+  //       codeBlockLanguages.forEach(currentCodeLang => {
+  //         if (currentCodeLang === foundLang) {
+  //           found = true;
+  //         }
+  //       });
+  //       if (!found) {
+  //         availableLanguages
+  //         this.setState({
+  //           codeBlockLanguages: [...codeBlockLanguages, foundLang]
+  //         });
+  //       }
+  //     });
+  //   }
+  // };
+
+  handleChangeValue = (value: string) => {
+    // this.checkLangList(value);
   };
   public render() {
+    console.log(this.state.codeBlockLanguages);
     return (
-      <div style={{ height: "100vh", width: "50%" }}>
-        <CodeMirror
-          className="editor"
-          value={this.state.value}
-          options={{
-            mode: "gfm",
-            theme: "one-dark-vivid"
-          }}
-          onBeforeChange={(editor, data, value) => {
-            this.setState({ value });
-          }}
-          onChange={(editor, data, value) => {
-            this.handleChangeValue(value);
-          }}
-        />
-      </div>
+      <>
+        <Header />
+        <div style={{ height: "calc(100vh - 60px)", width: "100%" }}>
+          <CodeMirror
+            className="editor"
+            value={this.state.value}
+            options={{
+              mode: "gfm",
+              theme: "one-dark-vivid",
+              lineNumbers: true
+            }}
+            onBeforeChange={(editor, data, value) => {
+              this.setState({ value });
+            }}
+            onChange={(editor, data, value) => {
+              this.handleChangeValue(value);
+            }}
+          />
+        </div>
+      </>
     );
   }
 }

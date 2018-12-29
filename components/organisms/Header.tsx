@@ -7,8 +7,11 @@ import LogoSrc from "../../static/devlover-logo.svg";
 import { Avatar } from "../atoms/Avatar";
 
 import { Pencil } from "styled-icons/boxicons-solid/Pencil";
+import { RootState } from "../../store";
+import { connect } from "react-redux";
 
 export interface HeaderProps {
+  isDarkMode?: boolean;
   isLogin?: boolean;
   user?: {
     username: string;
@@ -21,10 +24,10 @@ interface HeaderState {
   showModalLogin: boolean;
 }
 
-const Wrapper = styled.header`
+const SCHeader = styled.header<HeaderProps>``;
+const Wrapper = styled(SCHeader)`
   width: 100%;
-  background: ${props => props.theme.black};
-  border-bottom: solid 1px ${props => props.theme.grey};
+  background: rgba(0, 0, 0, 0.1);
 `;
 const Container = styled.div`
   max-width: ${props => props.theme.containerWidth}px;
@@ -44,18 +47,20 @@ const Logo = styled.img`
   height: 40px;
   object-fit: contain;
 `;
-const LogoText = styled.h1`
+const SCLogoText = styled.header<HeaderProps>``;
+const LogoText = styled(SCLogoText)`
   margin: 0 10px;
   font-family: ${props => props.theme.fontFamilyMonospace};
   font-weight: bold;
   font-size: 20px;
-  color: ${props => props.theme.white};
+  color: ${props => props.theme.fontColor(props.isDarkMode)};
+
   span {
     color: ${props => props.theme.red};
   }
 `;
 
-export class Header extends React.Component<HeaderProps, HeaderState> {
+class HeaderComp extends React.Component<HeaderProps, HeaderState> {
   renderBeforeLogin() {
     return (
       <>
@@ -78,13 +83,13 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
   render() {
     const logoSrc = LogoSrc;
     return (
-      <Wrapper>
+      <Wrapper isDarkMode={this.props.isDarkMode}>
         <Container>
           <Link href="/">
             <a>
               <Section>
                 <Logo src={logoSrc} />
-                <LogoText>
+                <LogoText isDarkMode={this.props.isDarkMode}>
                   DEV<span>LOVER</span>.ID
                 </LogoText>
               </Section>
@@ -104,3 +109,11 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
     );
   }
 }
+
+const mapStateToProps = (state: RootState) => {
+  return {
+    isDarkMode: state.app.isDarkMode
+  };
+};
+
+export const Header = connect(mapStateToProps)(HeaderComp);

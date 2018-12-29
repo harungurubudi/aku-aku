@@ -1,6 +1,8 @@
 import * as React from "react";
 import styled from "../styledComponents";
 import { getFontColor } from "./getBackground";
+import { connect } from "react-redux";
+import { RootState } from "../../store";
 
 export interface ButtonProps extends React.DOMAttributes<HTMLButtonElement> {
   // children: React.ReactChild | React.ReactChild[];
@@ -9,21 +11,21 @@ export interface ButtonProps extends React.DOMAttributes<HTMLButtonElement> {
   isInvert?: boolean;
   isLast?: boolean;
   isBottom?: boolean;
+  isDarkMode?: boolean;
 }
 
 const SCButton = styled.button<ButtonProps>``;
 const Wrapper = styled(SCButton)`
   position: relative;
   background: ${props =>
-    props.isInvert ? props.theme.white : props.theme.black};
+    props.isDarkMode ? `rgba(255,255,255,.1)` : `rgba(0,0,0,.1)`};
   color: ${props => {
     return getFontColor(
       props.fontColor,
       props.theme,
-      props.isInvert ? props.theme.black : props.theme.white
+      props.isDarkMode ? props.theme.white : props.theme.black
     );
   }};
-  border: none;
   font-family: ${props => props.theme.fontFamilyMonospace};
   /* color: ${props => props.theme.black}; */
   font-weight: bold;
@@ -35,7 +37,8 @@ const Wrapper = styled(SCButton)`
   margin-right: ${props => (props.isLast ? 0 : 12)}px;
   margin-bottom: ${props => (props.isBottom ? 0 : 12)}px;
   font-size: 14px;
-  border: solid 2px ${props => props.theme.black};
+  /* border: solid 2px ${props => props.theme.black}; */
+  border: none;
   border-radius: 4px;
 
   .icon {
@@ -58,6 +61,12 @@ const Wrapper = styled(SCButton)`
   }
 `;
 
-export const Button = (props: ButtonProps) => {
-  return <Wrapper {...props} />;
+const mapStateToProps = (state: RootState) => {
+  return {
+    isDarkMode: state.app.isDarkMode
+  };
 };
+
+export const Button = connect(mapStateToProps)((props: ButtonProps) => {
+  return <Wrapper {...props} />;
+});

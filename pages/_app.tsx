@@ -6,7 +6,7 @@ import { theme } from "../components/theme";
 import { GlobalStyle } from "../components/GlobalStyle";
 import { Provider } from "react-redux";
 import withRedux from "next-redux-wrapper";
-import { initStore } from "../store";
+import { initStore, RootState } from "../store";
 import { Store } from "redux";
 
 interface AppContext {
@@ -26,8 +26,7 @@ export default withRedux(initStore)(
 
     render() {
       const { Component, pageProps, store } = this.props;
-      const state = store.getState();
-      console.log(state);
+      // const state: RootState = store.getState();
       return (
         <Container>
           <Provider store={store}>
