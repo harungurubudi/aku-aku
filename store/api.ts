@@ -15,7 +15,7 @@ interface DoRequestParams<T> {
   apiMethod: () => AxiosPromise<T>;
   onStart?: () => void;
   onError?: (e: AxiosError) => void;
-  onSuccess?: (data: AxiosResponse<T>) => void;
+  onSuccess?: (data: T) => void;
   onEnd?: () => void;
 }
 async function DoRequest<T>({
@@ -29,13 +29,11 @@ async function DoRequest<T>({
     onStart();
   }
   try {
-    const data = await apiMethod();
-    if (onSuccess && data) {
-      console.log(data);
-      onSuccess(data);
+    const response = await apiMethod();
+    if (onSuccess && response) {
+      onSuccess(response.data);
     }
   } catch (e) {
-    console.log(e);
     if (onError) {
       onError(e);
     }

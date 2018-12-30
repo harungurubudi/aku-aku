@@ -2,6 +2,7 @@ import { createGlobalStyle } from "./styledComponents";
 import { connect } from "react-redux";
 import { RootState } from "../store";
 import chroma from "chroma-js";
+import { getBackground } from "./atoms/getBackground";
 
 // export const Style = createGlobalStyle`
 export const Style = createGlobalStyle<{ isDarkMode: boolean }>`
@@ -27,11 +28,12 @@ export const Style = createGlobalStyle<{ isDarkMode: boolean }>`
   }
 
   .github-button {
+    line-height: 1;
     position: relative;
     background: ${props =>
-      props.isDarkMode ? `rgba(255,255,255,.1)` : `rgba(0,0,0,.1)`};
-    color: ${props =>
       props.isDarkMode ? props.theme.white : props.theme.black};
+    color: ${props =>
+      props.isDarkMode ? props.theme.black : props.theme.white};
     font-family: ${props => props.theme.fontFamilyMonospace};
     font-weight: bold;
     text-transform: uppercase;

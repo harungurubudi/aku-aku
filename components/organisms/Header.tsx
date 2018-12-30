@@ -6,9 +6,13 @@ import Link from "next/link";
 import LogoSrc from "../../static/devlover-logo.svg";
 import { Avatar } from "../atoms/Avatar";
 
-import { Pencil } from "styled-icons/boxicons-solid/Pencil";
+import { Pen } from "styled-icons/boxicons-regular/Pen";
 import { RootState } from "../../store";
 import { connect } from "react-redux";
+
+import chroma from "chroma-js";
+import { Input } from "../atoms";
+import { Search } from "styled-icons/boxicons-regular";
 
 export interface HeaderProps {
   isDarkMode?: boolean;
@@ -27,7 +31,25 @@ interface HeaderState {
 const SCHeader = styled.header<HeaderProps>``;
 const Wrapper = styled(SCHeader)`
   width: 100%;
-  background: rgba(0, 0, 0, 0.1);
+  background: ${props =>
+    props.isDarkMode
+      ? chroma(props.theme.black)
+          .brighten(0.3)
+          .hex()
+      : chroma(props.theme.grey)
+          .brighten(0.8)
+          .hex()};
+  box-shadow: 0px 3px 20px
+    ${props =>
+      props.isDarkMode
+        ? chroma(props.theme.black)
+            .darken(0.3)
+            .alpha(0.8)
+            .css()
+        : chroma(props.theme.grey)
+            .brighten(0.7)
+            .alpha(0.8)
+            .css()};
 `;
 const Container = styled.div`
   max-width: ${props => props.theme.containerWidth}px;
@@ -39,6 +61,7 @@ const Container = styled.div`
   align-items: center;
 `;
 const Section = styled.div`
+  flex: 1;
   align-items: center;
   display: flex;
 `;
@@ -64,15 +87,15 @@ class HeaderComp extends React.Component<HeaderProps, HeaderState> {
   renderBeforeLogin() {
     return (
       <>
-        <Button iconColor="green" isInvert isBottom>
-          <Pencil className="icon" size={16} />
-          Buat post
+        <Button background="red" isBottom isLast>
+          <Pen className="icon" size={16} />
+          Buat Artikel
         </Button>
       </>
     );
   }
 
-  renderAfterLogin(user: { username: string }) {
+  renderAfterLogin(user: { username: string } = { username: "" }) {
     return (
       <>
         <Avatar username={user.username} isBottom isLast />
@@ -85,16 +108,26 @@ class HeaderComp extends React.Component<HeaderProps, HeaderState> {
     return (
       <Wrapper isDarkMode={this.props.isDarkMode}>
         <Container>
-          <Link href="/">
-            <a>
-              <Section>
-                <Logo src={logoSrc} />
-                <LogoText isDarkMode={this.props.isDarkMode}>
-                  DEV<span>LOVER</span>.ID
-                </LogoText>
-              </Section>
-            </a>
-          </Link>
+          <Section>
+            <Link href="/">
+              <a>
+                <Section>
+                  <Logo src={logoSrc} />
+                  <LogoText isDarkMode={this.props.isDarkMode}>
+                    DEV<span>LOVER</span>.ID
+                  </LogoText>
+                </Section>
+              </a>
+            </Link>
+          </Section>
+          <Section>
+            <Input
+              placeholder="Cari..."
+              iconBefore={<Search className="icon" size={16} />}
+              isBottom
+              isFullWidth
+            />
+          </Section>
           <Section
             style={{
               justifyContent: "flex-end"

@@ -59,16 +59,18 @@ export const reducer: Reducer = (
 };
 
 // ACTION
-
-export const authGithub = () => (dispatch: Dispatch<BaseAction>) => {
+export const authGithub = (githubOAuthCode: string) => (
+  dispatch: Dispatch<BaseAction>
+) => {
   return DoRequest<BaseAction>({
     apiMethod() {
-      return Api.get("/");
+      const URL = "/v1/oauth/github";
+      return Api.get(URL, { params: { code: githubOAuthCode } });
     },
     onStart() {
       dispatch({ type: actionTypes[ActionTypes.AUTH_GITHUB_START] });
     },
-    onSuccess(data: AxiosResponse) {
+    onSuccess(data: BaseAction) {
       dispatch({
         type: actionTypes[ActionTypes.AUTH_GITHUB_SUCCESS],
         payload: data

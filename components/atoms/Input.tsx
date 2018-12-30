@@ -1,48 +1,74 @@
 import * as React from "react";
 import styled from "../styledComponents";
-import { ThemeInterface } from "../theme";
-import { getBackground } from "./getBackground";
+import chroma from "chroma-js";
+import { connect } from "react-redux";
+import { RootState } from "../../store";
 
 interface InputProps {
   background?: "red" | "yellow" | "blue" | "green";
-  label?: string;
+  // label?: string;
   value?: string | number;
   placeholder?: string;
   onChange?: () => void;
   type?: string;
   // tslint:disable-next-line:no-any
   ref?: any;
+  isBottom?: boolean;
+  // tslint:disable-next-line:no-any
+  iconBefore?: any;
+  isFullWidth?: boolean;
+  isDarkMode?: boolean;
 }
 
 const SCInput = styled.input<InputProps>``;
 const Wrapper = styled(SCInput)`
-  padding: 5px 10px;
-  padding-top: 16px;
+  padding: 5px 12px;
+  padding-left: ${props => (props.iconBefore ? 32 : 12)}px;
+  /* padding-top: 16px; */
   outline: none;
-  border: solid 2px ${props => props.theme.black};
+  /* border: none; */
+  width: ${props => (props.isFullWidth ? "100%" : "auto")};
+  border: solid 1px
+    ${props =>
+      props.isDarkMode
+        ? chroma(props.theme.black)
+            .brighten(0.2)
+            .hex()
+        : chroma(props.theme.grey)
+            .brighten(0.8)
+            .hex()};
   position: relative;
-  border-radius: 4px;
-  /* background: ${props => props.theme.grey}; */
-  border-color: ${(props: { background: string; theme: ThemeInterface }) =>
-    getBackground(props.background, props.theme)};
+  border-radius: 7px;
+  background: ${props =>
+    props.isDarkMode
+      ? chroma(props.theme.black)
+          .darken(0.12)
+          .hex()
+      : chroma(props.theme.grey)
+          .brighten(0.95)
+          .hex()};
+  color: ${props => (props.isDarkMode ? props.theme.white : props.theme.black)};
+  box-shadow: 0px 3px 20px
+    ${props =>
+      props.isDarkMode
+        ? chroma(props.theme.black)
+            .alpha(0.4)
+            .css()
+        : chroma(props.theme.grey)
+            .brighten(0.2)
+            .alpha(0.4)
+            .css()};
   font-size: 16px;
-  margin-bottom: 16px;
-`;
-const Label = styled.label`
-  position: absolute;
-  top: -18px;
-  left: 0px;
-  font-size: 11px;
-  line-height: 1;
-  width: 100%;
-  font-family: ${props => props.theme.fontFamilyMonospace};
-  font-weight: bold;
-  text-transform: uppercase;
-  padding: 4px 12px;
-  color: ${props => props.theme.fontColor()};
+  margin-bottom: ${props => (props.isBottom ? 0 : 16)}px;
 `;
 
-export const Input = (props: InputProps) => {
+const mapStateToProps = (state: RootState) => {
+  return {
+    isDarkMode: state.app.isDarkMode
+  };
+};
+
+export const Input = connect(mapStateToProps)((props: InputProps) => {
   return (
     <span style={{ position: "relative" }}>
       <Wrapper
@@ -52,8 +78,16 @@ export const Input = (props: InputProps) => {
         value={props.value}
         onChange={props.onChange}
         placeholder={props.placeholder}
+        isBottom={props.isBottom}
+        iconBefore={props.iconBefore}
+        isFullWidth={props.isFullWidth}
+        isDarkMode={props.isDarkMode}
       />
-      <Label>{props.label}</Label>
+      {props.iconBefore ? (
+        <span style={{ position: "absolute", left: 8, top: 5 }}>
+          {props.iconBefore}
+        </span>
+      ) : null}
     </span>
   );
-};
+});
