@@ -58,7 +58,7 @@ class Index extends React.Component<IndexProps, {}> {
             <h1 style={{ fontFamily: theme.fontFamilyMonospace, marginTop: 0 }}>
               DEV<span style={{ color: theme.red }}>LOVER</span>.ID
             </h1>
-            <h3 style={{ fontWeight: "normal", maxWidth: 600 }}>
+            <h3 style={{ fontWeight: "normal", maxWidth: 600, opacity: 0.7 }}>
               <strong>
                 <code>devlover.id</code>
               </strong>{" "}
