@@ -5,10 +5,12 @@ import chroma from "chroma-js";
 
 // export const Style = createGlobalStyle`
 export const Style = createGlobalStyle<{ isDarkMode: boolean }>`
+
   body {
     font-family: ${props => props.theme.fontFamilySansSerif};
     color: ${props => props.theme.fontColor(props.isDarkMode)};
     background-color: ${props => props.theme.background(props.isDarkMode)};
+    line-height: 1.5;
   }
   a {
     text-decoration: none;
@@ -19,7 +21,7 @@ export const Style = createGlobalStyle<{ isDarkMode: boolean }>`
 
     .CodeMirror {
       height: 100%;
-      font-size: 16px;
+      font-size: 14px;
       line-height: 1.5;
     }
   }
@@ -42,6 +44,8 @@ export const Style = createGlobalStyle<{ isDarkMode: boolean }>`
     border: none;
     border-radius: 4px;
 
+    margin-bottom: 12px;
+
     .icon {
       margin-right: 5px;
       color: ${props =>
@@ -60,7 +64,7 @@ export const Style = createGlobalStyle<{ isDarkMode: boolean }>`
   /* CODEMIRROR THEME */
   /* ONE DARK */
 
-  .cm-s-one-dark-vivid {
+  .cm-s-devlover {
     font-family: ${props => props.theme.fontFamilyMonospace};
     color: ${props => props.theme.fontColor(props.isDarkMode)};
     background-color: ${props => props.theme.background(props.isDarkMode)};

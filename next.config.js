@@ -1,7 +1,5 @@
 require("dotenv").config();
-
-const path = require("path");
-const Dotenv = require("dotenv-webpack");
+const webpack = require("webpack");
 
 const withTypescript = require("@zeit/next-typescript");
 const withStyledIcons = require("next-plugin-styled-icons");
@@ -11,16 +9,14 @@ const withCSS = require("@zeit/next-css");
 const config = {
   webpack: config => {
     config.plugins = config.plugins || [];
+    const env = new webpack.EnvironmentPlugin([
+      "GITHUB_CLIENT_ID",
+      "GITHUB_REDIRECT_URI",
+      "NODE_ENV",
+      "TEST"
+    ]);
 
-    config.plugins = [
-      ...config.plugins,
-
-      // Read the .env file
-      new Dotenv({
-        path: path.join(__dirname, ".env"),
-        systemvars: true
-      })
-    ];
+    config.plugins = [...config.plugins, env];
 
     return config;
   }

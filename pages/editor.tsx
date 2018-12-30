@@ -78,7 +78,7 @@ export default class Editor extends React.Component<EditorProps, EditorState> {
             value={this.state.value}
             options={{
               mode: "gfm",
-              theme: "one-dark-vivid",
+              theme: "devlover",
               lineNumbers: true
             }}
             onBeforeChange={(editor, data, value) => {

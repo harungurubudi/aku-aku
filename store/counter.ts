@@ -1,4 +1,5 @@
 import { Action, Dispatch, Reducer, DeepPartial } from "redux";
+import { createActionTypes } from "./utils";
 
 // STATE
 export interface State {
@@ -9,10 +10,11 @@ export const initialState: DeepPartial<State> = {
 };
 
 // TYPES
-export const actionTypes = {
-  INCREMENT: "INCREMENT",
-  DECREMENT: "DECREMENT"
-};
+enum ActionTypes {
+  INCREMENT,
+  DECREMENT
+}
+export const actionTypes = createActionTypes("counter", ActionTypes);
 
 // REDUCERS
 export const reducer: Reducer = (

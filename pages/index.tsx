@@ -1,10 +1,9 @@
 import * as React from "react";
 import GitHubLogin from "react-github-login";
 import { connect } from "react-redux";
-import { bindActionCreators, Action } from "redux";
-import { Button } from "../components/atoms/Button";
-import { Container } from "../components/atoms/Container";
-import { Header } from "../components/organisms/Header";
+import { bindActionCreators } from "redux";
+import { Button, Container } from "../components/atoms";
+import { Header } from "../components/organisms";
 import { RootState } from "../store";
 import { appToggleDarkMode } from "../store/app";
 import { counterIncrement, counterIncrementAsync } from "../store/counter";
@@ -18,7 +17,6 @@ export interface IndexProps {
   counterIncrementAsync: () => void;
   appToggleDarkMode: () => void;
 }
-
 class Index extends React.Component<IndexProps, {}> {
   static async getInitialProps({ isServer, store }: InitialProps) {
     if (isServer) {
@@ -37,9 +35,11 @@ class Index extends React.Component<IndexProps, {}> {
       <div>
         <Header />
         <Container>
-          <Button fontColor="pink">Login</Button>
-          <h2>{process.env.TEST}</h2>
-          <h1>{this.props.counter}</h1>
+          <h3 style={{ fontWeight: "normal", maxWidth: 600, marginTop: 70 }}>
+            devlover.id adalah platform dimana software-engineer di Indonesia,
+            berbagi ilmu, ide dan pengalaman, serta untuk saling membantu satu
+            sama lain.
+          </h3>
           <GitHubLogin
             className="github-button"
             clientId={process.env.GITHUB_CLIENT_ID}
@@ -48,9 +48,8 @@ class Index extends React.Component<IndexProps, {}> {
             onFailure={this.onFailure}
           />
           <br />
-          <Button onClick={() => this.props.counterIncrementAsync()}>
-            inc async
-          </Button>
+          <br />
+          <hr />
           <h2>{this.props.isDarkMode ? "darkmode" : "lightmode"}</h2>
           <br />
           <Button onClick={() => this.props.appToggleDarkMode()}>
