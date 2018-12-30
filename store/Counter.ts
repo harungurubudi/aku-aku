@@ -1,5 +1,5 @@
-import { Action, Dispatch, Reducer, DeepPartial } from "redux";
-import { createActionTypes } from "./utils";
+import { Dispatch, Reducer, DeepPartial } from "redux";
+import { createActionTypes, BaseAction } from "./utils";
 
 // STATE
 export interface State {
@@ -19,15 +19,15 @@ export const actionTypes = createActionTypes("counter", ActionTypes);
 // REDUCERS
 export const reducer: Reducer = (
   state: DeepPartial<State> = initialState,
-  action: Action
+  action: BaseAction
 ) => {
   switch (action.type) {
-    case actionTypes.INCREMENT:
+    case actionTypes[ActionTypes.INCREMENT]:
       return {
         ...state,
-        count: state.count + 1
+        count: state.count + action.payload
       };
-    case actionTypes.DECREMENT:
+    case actionTypes[ActionTypes.DECREMENT]:
       return {
         ...state,
         count: state.count - 1
@@ -38,15 +38,20 @@ export const reducer: Reducer = (
 };
 
 // ACTION
-export const counterIncrement = () => (dispatch: Dispatch) => {
-  return dispatch({ type: actionTypes.INCREMENT });
+export const counterIncrement = (amount: number = 1) => (
+  dispatch: Dispatch
+) => {
+  return dispatch({
+    type: actionTypes[ActionTypes.INCREMENT],
+    payload: amount
+  });
 };
 export const counterIncrementAsync = () => async (dispatch: Dispatch) => {
   return await setTimeout(
-    () => dispatch({ type: actionTypes.INCREMENT }),
+    () => dispatch({ type: actionTypes[ActionTypes.INCREMENT] }),
     2000
   );
 };
 export const counterDecrement = () => (dispatch: Dispatch) => {
-  return dispatch({ type: actionTypes.DECREMENT });
+  return dispatch({ type: actionTypes[ActionTypes.DECREMENT] });
 };

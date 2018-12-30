@@ -10,7 +10,7 @@ export const initialState: DeepPartial<State> = {
 
 // TYPES
 export const actionTypes = {
-  TOGGLE_DARK_MODE: "TOGGLE_DARK_MODE"
+  TOGGLE_DARK_MODE: "@app/TOGGLE_DARK_MODE"
 };
 
 // REDUCERS

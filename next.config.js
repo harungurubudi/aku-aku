@@ -13,6 +13,7 @@ const config = {
       "GITHUB_CLIENT_ID",
       "GITHUB_REDIRECT_URI",
       "NODE_ENV",
+      "API_URI",
       "TEST"
     ]);
 

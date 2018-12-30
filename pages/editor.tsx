@@ -8,6 +8,7 @@ import "codemirror/lib/codemirror.css";
 if (process.browser) {
   require("codemirror/mode/gfm/gfm");
   require("codemirror/mode/jsx/jsx");
+  require("codemirror/mode/clike/clike");
   require("codemirror/mode/go/go");
 }
 

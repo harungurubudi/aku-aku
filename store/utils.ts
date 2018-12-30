@@ -1,10 +1,19 @@
-export const createActionTypes = (
+import { Action } from "redux";
+
+export function createActionTypes(
   stateName: string,
-  actions: object
-): { [x: string]: string } => {
-  let result = {};
-  Object.keys(actions).forEach(action => {
-    result[action] = `@${stateName}/${action}`;
+  ActionsEnum: object
+): string[] {
+  let result = [];
+  Object.keys(ActionsEnum).forEach(action => {
+    result[action] = `@${stateName}/${ActionsEnum[action]}`;
   });
   return result;
-};
+}
+
+export interface BaseAction extends Action {
+  // tslint:disable-next-line:no-any
+  payload?: any;
+  // tslint:disable-next-line:no-any
+  meta?: any;
+}
