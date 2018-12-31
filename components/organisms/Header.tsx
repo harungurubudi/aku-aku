@@ -30,6 +30,8 @@ interface HeaderState {
 
 const SCHeader = styled.header<HeaderProps>``;
 const Wrapper = styled(SCHeader)`
+  position: relative;
+  z-index: 2;
   width: 100%;
   background: ${props =>
     props.isDarkMode
@@ -43,7 +45,7 @@ const Wrapper = styled(SCHeader)`
     ${props =>
       props.isDarkMode
         ? chroma(props.theme.black)
-            .darken(0.3)
+            .darken(0.1)
             .alpha(0.8)
             .css()
         : chroma(props.theme.grey)
@@ -88,7 +90,7 @@ class HeaderComp extends React.Component<HeaderProps, HeaderState> {
     return (
       <>
         <Button background="red" isBottom isLast>
-          <Pen className="icon" size={16} />
+          <Pen className="icon" size={14} />
           Buat Artikel
         </Button>
       </>

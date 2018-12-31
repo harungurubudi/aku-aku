@@ -14,6 +14,7 @@ import chroma from "chroma-js";
 import routes from "../routes";
 import { BaseAction } from "../store/utils";
 import { theme } from "../components/theme";
+import { Landing } from "../components/organisms/Landing";
 const Link = routes.Link;
 export interface IndexProps {
   counter: number;
@@ -28,55 +29,16 @@ export interface IndexProps {
 class Index extends React.Component<IndexProps, {}> {
   static async getInitialProps({ isServer, store }: InitialProps) {
     if (isServer) {
-      await store.dispatch(counterIncrement());
+      // await store.dispatch(counterIncrement());
     }
     return {};
   }
-  onSuccessGithub = (response: { code: string }) => {
-    this.props.authGithub(response.code);
-  };
-  onFailureGithub = (response: Error) => {
-    throw response;
-  };
+
   public render() {
     return (
       <div>
         <Header />
-        <div
-          style={{
-            padding: "40px 0",
-            background: this.props.isDarkMode
-              ? chroma(theme.black)
-                  .brighten(0.2)
-                  .hex()
-              : chroma(theme.grey)
-                  .brighten(1.2)
-                  .hex()
-          }}
-        >
-          <Container>
-            <h1 style={{ fontFamily: theme.fontFamilyMonospace, marginTop: 0 }}>
-              DEV<span style={{ color: theme.red }}>LOVER</span>.ID
-            </h1>
-            <h3 style={{ fontWeight: "normal", maxWidth: 600, opacity: 0.7 }}>
-              <strong>
-                <code>devlover.id</code>
-              </strong>{" "}
-              adalah platform dimana software-engineer di Indonesia, berbagi
-              ilmu, ide dan pengalaman, serta untuk saling membantu satu sama
-              lain.
-            </h3>
-            <Button background="red">Explore</Button>
-            <GitHubLogin
-              // buttonText="Connect with Github"
-              className="github-button"
-              clientId={process.env.GITHUB_CLIENT_ID}
-              redirectUri={process.env.GITHUB_REDIRECT_URI}
-              onSuccess={this.onSuccessGithub}
-              onFailure={this.onFailureGithub}
-            />
-          </Container>
-        </div>
+        <Landing />
         <Container>
           <h2>{this.props.isDarkMode ? "darkmode" : "lightmode"}</h2>
           <br />

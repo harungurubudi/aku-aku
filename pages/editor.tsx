@@ -53,6 +53,10 @@ export default class Editor extends React.Component<EditorProps, EditorState> {
     codeBlockLanguages: []
   };
 
+  componentDidMount() {
+    this.forceUpdate();
+  }
+
   // private checkLangList = val => {
   //   const langMatch = val.match(/```[a-z]*\n[\s\S]*?\n```/g);
   //   if (langMatch) {
