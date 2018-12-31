@@ -37,7 +37,7 @@ export default withRedux(initStore)(
             <ThemeProvider theme={theme}>
               <div>
                 <GlobalStyle />
-                <NProgress />
+                <NProgress color={theme.red} options={{ showSpinner: false }} />
                 <Component {...pageProps} />
               </div>
             </ThemeProvider>
