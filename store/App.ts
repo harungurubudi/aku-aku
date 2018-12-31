@@ -5,7 +5,8 @@ export interface State {
   isDarkMode: boolean;
 }
 export const initialState: DeepPartial<State> = {
-  isDarkMode: false
+  isDarkMode: true
+  // isDarkMode: false
 };
 
 // TYPES

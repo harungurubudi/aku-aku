@@ -98,6 +98,6 @@ export default class MDRenderer extends React.Component<MDRendererProps, {}> {
       .processSync(this.props.value).contents;
   };
   public render() {
-    return <div>{this.renderMarkdown()}</div>;
+    return <div className="renderer">{this.renderMarkdown()}</div>;
   }
 }

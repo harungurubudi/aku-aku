@@ -37,6 +37,6 @@ export const theme: ThemeInterface = {
   fontFamilySansSerif:
     '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;',
   fontFamilyMonospace:
-    '"SF Mono", "Segoe UI Mono", "Roboto Mono", Menlo, Courier, monospace;',
+    '"SF Mono", "Segoe UI Mono", "Roboto Mono", "Droid Sans Mono", Menlo, monospace;',
   containerWidth: 1100
 };

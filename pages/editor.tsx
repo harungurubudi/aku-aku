@@ -26,7 +26,7 @@ const initialValue = `
 This is markdown title
 ====
 
-# with heading
+## with heading 2
 
 Hello guys kembali dengan saya disini
 ini adalah **bold**, _italic_ ~~coret~~
@@ -76,12 +76,10 @@ export default class Editor extends React.Component<EditorProps, EditorState> {
           <div
             style={{
               maxWidth: "50%",
-              padding: 20,
               borderLeft: "solid 1px rgba(0,0,0,.05)",
               height: "calc(100vh - 60px)",
               flex: 1,
-              overflow: "auto",
-              fontSize: 14
+              overflow: "auto"
             }}
           >
             <MDRenderer value={this.state.value} />
