@@ -3,19 +3,11 @@ import { Controlled as ReactCodeMirror } from "react-codemirror2";
 import * as React from "react";
 import { Header } from "../components/organisms/Header";
 
-import remark from "remark";
-import remarkReact from "remark-react";
-import highlighter from "remark-react-codemirror";
-import sanitizeGhSchema from "hast-util-sanitize/lib/github.json";
-import merge from "deepmerge";
-
 import "codemirror/lib/codemirror.css";
+import MDEditor from "../components/organisms/MDEditor";
+import MDRenderer from "../components/organisms/MDRenderer";
 
-let CodeMirror;
 if (process.browser) {
-  CodeMirror = require("codemirror");
-  require("codemirror/addon/runmode/runmode");
-  require("codemirror/mode/meta");
   require("codemirror/mode/gfm/gfm");
   require("codemirror/mode/jsx/jsx");
   require("codemirror/mode/clike/clike");
@@ -28,7 +20,7 @@ interface EditorState {
   codeBlockLanguages: string[];
 }
 
-const availableLanguages = ["jsx", "go"];
+// const availableLanguages = ["jsx", "go"];
 
 const initialValue = `
 This is markdown title
@@ -46,6 +38,10 @@ const Component = (props) => {
   return <div>Hello {props.world}</div>
 }
 \`\`\`
+
+'single quote' with :smile:
+
+**"Hanging** punctuation"
 `;
 export default class Editor extends React.Component<EditorProps, EditorState> {
   state = {
@@ -57,80 +53,38 @@ export default class Editor extends React.Component<EditorProps, EditorState> {
     this.forceUpdate();
   }
 
-  // private checkLangList = val => {
-  //   const langMatch = val.match(/```[a-z]*\n[\s\S]*?\n```/g);
-  //   if (langMatch) {
-  //     const { codeBlockLanguages } = this.state;
-  //     langMatch.forEach((item: string) => {
-  //       const foundLang = item.split("\n")[0].split("```")[1];
-  //       let found = false;
-  //       codeBlockLanguages.forEach(currentCodeLang => {
-  //         if (currentCodeLang === foundLang) {
-  //           found = true;
-  //         }
-  //       });
-  //       if (!found) {
-  //         availableLanguages
-  //         this.setState({
-  //           codeBlockLanguages: [...codeBlockLanguages, foundLang]
-  //         });
-  //       }
-  //     });
-  //   }
-  // };
-
-  handleChangeValue = (value: string) => {
-    // this.checkLangList(value);
-  };
-
-  renderMarkdown = () => {
-    let remarkOption = {};
-    if (process.browser) {
-      const schema = merge(sanitizeGhSchema, {
-        attributes: { code: ["className"] }
-      });
-      try {
-        remarkOption = {
-          sanitize: schema,
-          remarkReactComponents: {
-            code: highlighter(CodeMirror, {
-              theme: "devlover"
-            })
-          }
-        };
-      } catch (e) {
-        console.error(e);
-      }
-    }
-    return remark()
-      .use(remarkReact, remarkOption)
-      .processSync(this.state.value).contents;
-    // return null;
-  };
   public render() {
     return (
       <>
         <Header />
         <div style={{ display: "flex" }}>
-          <div style={{ height: "calc(100vh - 60px)", flex: 1 }}>
-            <ReactCodeMirror
-              className="editor"
+          <div
+            style={{
+              height: "calc(100vh - 60px)",
+              flex: 1,
+              maxWidth: "50%",
+              position: "relative",
+              zIndex: 1,
+              boxShadow: "0 0 20px rgba(0,0,0,.2)"
+            }}
+          >
+            <MDEditor
               value={this.state.value}
-              options={{
-                mode: "gfm",
-                theme: "devlover",
-                lineNumbers: true
-              }}
-              onBeforeChange={(editor, data, value) => {
-                this.setState({ value });
-              }}
-              onChange={(editor, data, value) => {
-                this.handleChangeValue(value);
-              }}
+              setValue={value => this.setState({ value })}
             />
           </div>
-          <div style={{ height: "calc(100vh - 60px)", flex: 1 }}>
-            {this.renderMarkdown()}
+          <div
+            style={{
+              maxWidth: "50%",
+              padding: 20,
+              borderLeft: "solid 1px rgba(0,0,0,.05)",
+              height: "calc(100vh - 60px)",
+              flex: 1,
+              overflow: "auto",
+              fontSize: 14
+            }}
+          >
+            <MDRenderer value={this.state.value} />
           </div>
         </div>
       </>

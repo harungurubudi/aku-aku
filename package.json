@@ -35,11 +35,14 @@
     "redux-devtools-extension": "^2.13.7",
     "redux-thunk": "^2.3.0",
     "remark": "^10.0.1",
+    "remark-gemoji-to-emoji": "^1.1.0",
     "remark-react": "^5.0.1",
     "remark-react-codemirror": "^1.0.5",
+    "remark-textr": "^3.0.3",
     "sanitize.css": "^8.0.0",
     "styled-components": "^4.1.2",
-    "styled-icons": "^5.5.0"
+    "styled-icons": "^5.5.0",
+    "typographic-base": "^1.0.4"
   },
   "devDependencies": {
     "@types/chroma-js": "^1.4.1",

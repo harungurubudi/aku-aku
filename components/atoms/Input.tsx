@@ -42,7 +42,7 @@ const Wrapper = styled(SCInput)`
   background: ${props =>
     props.isDarkMode
       ? chroma(props.theme.black)
-          .darken(0.12)
+          .brighten(0.65)
           .hex()
       : chroma(props.theme.grey)
           .brighten(0.95)
@@ -70,7 +70,12 @@ const mapStateToProps = (state: RootState) => {
 
 export const Input = connect(mapStateToProps)((props: InputProps) => {
   return (
-    <span style={{ position: "relative" }}>
+    <span
+      style={{
+        position: "relative",
+        width: props.isFullWidth ? "100%" : "auto"
+      }}
+    >
       <Wrapper
         ref={props.ref}
         type={props.type}

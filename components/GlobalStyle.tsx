@@ -63,13 +63,45 @@ export const Style = createGlobalStyle<{ isDarkMode: boolean }>`
     }
   }
 
+  .hang-two {
+    text-indent: -.45em;
+  }
+
   /* CODEMIRROR THEME */
   /* ONE DARK */
+
+  .pre-highlight {
+    background: ${props =>
+      props.isDarkMode
+        ? chroma(props.theme.black)
+            .brighten(0.2)
+            .hex()
+        : chroma(props.theme.grey)
+            .brighten(0.99)
+            .hex()};
+    box-shadow: 0px 3px 20px
+    ${props =>
+      props.isDarkMode
+        ? chroma(props.theme.black)
+            .alpha(0.4)
+            .css()
+        : chroma(props.theme.grey)
+            .brighten(0.2)
+            .alpha(0.4)
+            .css()};
+  }
 
   .cm-s-devlover {
     font-family: ${props => props.theme.fontFamilyMonospace};
     color: ${props => props.theme.fontColor(props.isDarkMode)};
-    background-color: ${props => props.theme.background(props.isDarkMode)};
+    background-color: ${props =>
+      props.isDarkMode
+        ? chroma(props.theme.black)
+            .brighten(0.2)
+            .hex()
+        : chroma(props.theme.grey)
+            .brighten(0.99)
+            .hex()};
     .CodeMirror-selected {
       background-color: ${props =>
         props.isDarkMode
@@ -171,7 +203,7 @@ export const Style = createGlobalStyle<{ isDarkMode: boolean }>`
     }
     .cm-def {
       color: ${props => props.theme.yellow};
-    } /* original:  ${props => props.theme.yellow}; */
+    }
     .cm-atom {
       color: ${props => props.theme.yellow};
     }
