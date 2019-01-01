@@ -1,11 +1,9 @@
 import { Controlled as ReactCodeMirror } from "react-codemirror2";
 
 import * as React from "react";
-import { Header } from "../components/organisms/Header";
+import { Header, MDEditor, MDRenderer } from "../components/organisms";
 
 import "codemirror/lib/codemirror.css";
-import MDEditor from "../components/organisms/MDEditor";
-import MDRenderer from "../components/organisms/MDRenderer";
 
 if (process.browser) {
   require("codemirror/mode/gfm/gfm");

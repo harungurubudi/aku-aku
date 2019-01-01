@@ -10,12 +10,12 @@ import "sanitize.css";
 import { GlobalStyle } from "../components/GlobalStyle";
 import { ThemeProvider } from "../components/styledComponents";
 import { theme } from "../components/theme";
-import { initStore } from "../store";
+import { initStore, RootState } from "../store";
 
 import NProgress from "next-nprogress/component";
 
 interface AppContext {
-  store: Store;
+  store: Store<RootState>;
 }
 export default withRedux(initStore)(
   class MyApp extends App<AppContext> {

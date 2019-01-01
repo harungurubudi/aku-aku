@@ -39,7 +39,7 @@ const Title = styled.h1`
 
 const Subtitle = styled.p`
   margin-top: 0;
-  
+
   em {
     opacity: 1;
     font-size: 1.1em;
@@ -47,13 +47,8 @@ const Subtitle = styled.p`
     font-family: ${props => props.theme.fontFamilyMonospace};
     font-weight: bold;
   }
-  strong {
-    font-family: ${props => props.theme.fontFamilyMonospace};
-    font-weight: bold;
-
-    span {
-      color: ${props => props.theme.red};
-    }
+  span {
+    opacity: 0.6;
   }
 `;
 
@@ -101,9 +96,11 @@ export const Landing = connect(
               Komunitas Developer
               <br />
             </em>
-            Kami adalah komunitas dimana software-engineer di Indonesia, berbagi
-            ilmu, ide dan pengalaman, serta untuk saling membantu satu sama
-            lain.
+            <span>
+              Kami adalah komunitas dimana software-engineer di Indonesia,
+              berbagi ilmu, ide dan pengalaman, serta untuk saling membantu satu
+              sama lain.
+            </span>
           </Subtitle>
           <Button background="red">
             <CodeBlock size={14} className="icon" />

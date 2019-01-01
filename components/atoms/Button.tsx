@@ -14,6 +14,8 @@ export interface ButtonProps extends React.DOMAttributes<HTMLButtonElement> {
   isLast?: boolean;
   isBottom?: boolean;
   isDarkMode?: boolean;
+  isUpperCase?: boolean;
+  size?: "small" | "medium" | "big";
 }
 
 const SCButton = styled.button<ButtonProps>``;
@@ -60,13 +62,25 @@ const Wrapper = styled(SCButton)`
   font-family: ${props => props.theme.fontFamilyMonospace};
   /* color: ${props => props.theme.black}; */
   font-weight: bold;
-  text-transform: uppercase;
+  text-transform: ${props =>
+    props.isUpperCase === false ? "normal" : "uppercase"};
   outline: none;
-  padding: 8px 12px;
+  ${props => {
+    if (props.size === "small") {
+      return `
+        padding: 4px 8px;
+        font-size: 12px;
+    `;
+    } else {
+      return `
+        padding: 8px 12px;
+        font-size: 14px;
+      `;
+    }
+  }}
   cursor: pointer;
   margin-right: ${props => (props.isLast ? 0 : 12)}px;
   margin-bottom: ${props => (props.isBottom ? 0 : 12)}px;
-  font-size: 14px;
   /* border: solid 2px ${props => props.theme.black}; */
   border: none;
   border-radius: 4px;

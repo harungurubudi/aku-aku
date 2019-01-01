@@ -7,7 +7,7 @@ export interface MDEditorProps {
   setValue: (value: string) => void;
 }
 
-export default class MDEditor extends React.Component<MDEditorProps, {}> {
+export class MDEditor extends React.Component<MDEditorProps, {}> {
   public render() {
     return (
       <ReactCodeMirror

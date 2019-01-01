@@ -13,19 +13,17 @@ const SCAvatar = styled.img<AvatarProps>``;
 const Wrapper = styled(SCAvatar)`
   position: relative;
   object-fit: cover;
-  width: 36px;
-  height: 36px;
-  background: ${props => props.theme.bgGrey};
-  /* box-shadow: 3px 3px 0 ${props => props.theme.fontColor}; */
+  width: ${props => (props.size ? props.size : 36)}px;
+  height: ${props => (props.size ? props.size : 36)}px;
+  background: ${props => props.theme.grey};
   margin-right: ${props => (props.isLast ? 0 : 12)}px;
   margin-bottom: ${props => (props.isBottom ? 0 : 12)}px;
-  border: solid 2px ${props => props.theme.fontColor};
-  border-radius: 18px;
+  border-radius: 100px;
 `;
 
 export const Avatar = (props: AvatarProps) => {
   const imageProvider = `https://api.adorable.io/avatars/${
-    props.size ? props.size : 30
+    props.size ? props.size : 36
   }/${props.username}.png`;
 
   return (
@@ -33,6 +31,7 @@ export const Avatar = (props: AvatarProps) => {
       src={props.src ? props.src : imageProvider}
       isBottom={props.isBottom}
       isLast={props.isLast}
+      size={props.size}
     />
   );
 };

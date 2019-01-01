@@ -10,7 +10,10 @@ const {
   createGlobalStyle,
   keyframes,
   ThemeProvider
-} = styledComponents as ThemedStyledComponentsModule<ThemeInterface>;
+} = styledComponents as ThemedStyledComponentsModule<
+  ThemeInterface,
+  { isDarkMode: boolean }
+>;
 
 export { css, createGlobalStyle, keyframes, ThemeProvider };
 export default styled;

@@ -15,16 +15,19 @@ export const RendererStyle = css<{ isDarkMode: boolean }>`
       font-size: 32px;
       font-family: ${props => props.theme.fontFamilyMonospace};
       margin-bottom: 0;
+      line-height: 1.2;
     }
     h2 {
       font-family: ${props => props.theme.fontFamilySansSerif};
       margin-bottom: 0;
       font-size: 24px;
+      line-height: 1.2;
     }
     h3,
     h4,
     h5,
     h6 {
+      line-height: 1.2;
       font-size: 20px;
       opacity: 0.6;
       font-family: ${props => props.theme.fontFamilyMonospace};
