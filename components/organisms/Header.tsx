@@ -7,6 +7,8 @@ import LogoSrc from "../../static/devlover-logo.svg";
 import { Avatar } from "../atoms/Avatar";
 
 import { Pen } from "styled-icons/boxicons-regular/Pen";
+import { Bell } from "styled-icons/boxicons-regular/Bell";
+import { Envelope } from "styled-icons/boxicons-regular/Envelope";
 import { RootState } from "../../store";
 import { connect } from "react-redux";
 
@@ -72,7 +74,7 @@ const Logo = styled.img`
   height: 40px;
   object-fit: contain;
 `;
-const SCLogoText = styled.header<HeaderProps>``;
+const SCLogoText = styled.span<HeaderProps>``;
 const LogoText = styled(SCLogoText)`
   margin: 0 10px;
   font-family: ${props => props.theme.fontFamilyMonospace};
@@ -83,16 +85,44 @@ const LogoText = styled(SCLogoText)`
   span {
     color: ${props => props.theme.red};
   }
+
+  @media (max-width: 820px) {
+    display: none;
+  }
+`;
+
+const SCIcon = styled.span<HeaderProps>``;
+const Icon = styled(SCIcon)`
+  margin-right: 5px;
+  padding: 5px;
+  border-radius: 20px;
+  color: ${props => props.theme.fontColor(props.isDarkMode)};
+  opacity: 0.6;
+
+  &:hover {
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.1);
+  }
+`;
+const Icon2 = styled(Icon)`
+  margin: 0;
 `;
 
 class HeaderComp extends React.Component<HeaderProps, HeaderState> {
   renderBeforeLogin() {
     return (
       <>
-        <Button background="red" isBottom isLast>
+        {/* <Button background="red" isBottom isLast>
           <Pen className="icon" size={14} />
           Buat Artikel
-        </Button>
+        </Button> */}
+        <Icon2 isDarkMode={this.props.isDarkMode}>
+          <Envelope className="icon" size={24} />
+        </Icon2>
+        <Icon isDarkMode={this.props.isDarkMode}>
+          <Bell className="icon" size={24} />
+        </Icon>
+        <Avatar size={32} username={"Wewe"} isBottom isLast />
       </>
     );
   }

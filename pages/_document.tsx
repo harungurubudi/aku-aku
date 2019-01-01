@@ -24,8 +24,11 @@ export default class MyDocument extends Document<MyDocumentProps> {
 
   render() {
     return (
-      <html>
-        <Head>{this.props.styleTags}</Head>
+      <html lang="id">
+        <Head>
+          <meta name="viewport" content="width=device-width" />
+          {this.props.styleTags}
+        </Head>
         <body>
           <Main />
           <NextScript />
