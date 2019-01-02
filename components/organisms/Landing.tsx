@@ -53,7 +53,8 @@ const Subtitle = styled.p`
 `;
 
 const Section = styled.div`
-  flex: 1;
+  /* flex: 1; */
+  max-width: 600px;
 `;
 
 interface LandingProps {
@@ -115,7 +116,6 @@ export const Landing = connect(
             onFailure={onFailureGithub}
           />
         </Section>
-        <Section />
       </Container>
     </Wrapper>
   );

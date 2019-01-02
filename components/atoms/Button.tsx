@@ -16,6 +16,7 @@ export interface ButtonProps extends React.DOMAttributes<HTMLButtonElement> {
   isDarkMode?: boolean;
   isUpperCase?: boolean;
   size?: "small" | "medium" | "big";
+  className?: string;
 }
 
 const SCButton = styled.button<ButtonProps>``;

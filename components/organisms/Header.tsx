@@ -15,6 +15,7 @@ import { connect } from "react-redux";
 import chroma from "chroma-js";
 import { Input } from "../atoms";
 import { Search } from "styled-icons/boxicons-regular";
+import { Dropdown } from "../molecules/Dropdown";
 
 export interface HeaderProps {
   isDarkMode?: boolean;
@@ -54,6 +55,12 @@ const Wrapper = styled(SCHeader)`
             .brighten(0.7)
             .alpha(0.8)
             .css()};
+
+  @media (max-width: 820px) {
+    .buat-artikel {
+      display: none;
+    }
+  }
 `;
 const Container = styled.div`
   max-width: ${props => props.theme.containerWidth}px;
@@ -107,22 +114,38 @@ const Icon = styled(SCIcon)`
 const Icon2 = styled(Icon)`
   margin: 0;
 `;
+const DropdownItem = styled.div`
+  font-size: 12px;
+  opacity: 0.6;
+  padding: 5px 0;
+  /* font-weight: bold; */
+`;
 
 class HeaderComp extends React.Component<HeaderProps, HeaderState> {
   renderBeforeLogin() {
     return (
       <>
-        {/* <Button background="red" isBottom isLast>
+        <Button background="red" isBottom className="buat-artikel">
           <Pen className="icon" size={14} />
           Buat Artikel
-        </Button> */}
+        </Button>
         <Icon2 isDarkMode={this.props.isDarkMode}>
           <Envelope className="icon" size={24} />
         </Icon2>
         <Icon isDarkMode={this.props.isDarkMode}>
           <Bell className="icon" size={24} />
         </Icon>
-        <Avatar size={32} username={"Wewe"} isBottom isLast />
+        <Dropdown
+          dropdownContent={({ onClose }) => (
+            <div>
+              <DropdownItem>Profil saya</DropdownItem>
+              <DropdownItem>Draf</DropdownItem>
+              <DropdownItem>Keluar</DropdownItem>
+            </div>
+          )}
+        >
+          <Avatar size={32} username={"Wewe"} isBottom isLast />
+        </Dropdown>
       </>
     );
   }
