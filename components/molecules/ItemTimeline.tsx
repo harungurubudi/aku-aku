@@ -8,6 +8,11 @@ const Wrapper = styled.div`
   display: flex;
   padding: 20px 0;
   padding-right: 20px;
+
+  @media (max-width: 480px) {
+    padding-right: 0;
+    flex-direction: column-reverse;
+  }
 `;
 const Title = styled.h3`
   line-height: 1.2;
@@ -23,6 +28,10 @@ const Description = styled.p`
   margin: 5px 0;
   line-height: 1.4;
   margin-bottom: 10px;
+
+  @media (max-width: 480px) {
+    font-size: 14px;
+  }
 `;
 const LeftSection = styled.div`
   flex: 1;
@@ -37,6 +46,14 @@ const RightSection = styled.div`
     height: 120px;
     border-radius: 4px;
     object-fit: cover;
+  }
+  @media (max-width: 480px) {
+    width: 100%;
+    margin: 0;
+    margin-bottom: 10px;
+    /* img {
+      height: 10px;
+    } */
   }
 `;
 
@@ -69,7 +86,9 @@ export class ItemTimeline extends React.Component<
           <Content>
             <div>
               {Object.keys(tags).map(tag => (
-                <Tag color={tags[tag]}>{tag}</Tag>
+                <Tag color={tags[tag]} key={tag}>
+                  {tag}
+                </Tag>
               ))}
             </div>
             <Title>{title}</Title>

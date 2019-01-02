@@ -7,7 +7,7 @@ import { RootState } from "../store";
 import { appToggleDarkMode } from "../store/App";
 import { counterIncrement } from "../store/Counter";
 import { authGithub } from "../store/Auth";
-import { InitialProps } from "../types";
+import { AppContext } from "../types";
 
 import routes from "../routes";
 import { BaseAction } from "../store/utils";
@@ -24,11 +24,10 @@ export interface IndexProps {
   counterIncrementAsync: () => void;
   appToggleDarkMode: () => void;
 }
-class Index extends React.Component<IndexProps, {}> {
-  static async getInitialProps({ isServer, store }: InitialProps) {
-    if (isServer) {
-      // await store.dispatch(counterIncrement());
-    }
+
+export interface IndexState {}
+class Index extends React.Component<IndexProps, IndexState> {
+  static async getInitialProps({ req }: AppContext) {
     return {};
   }
 
@@ -41,7 +40,7 @@ class Index extends React.Component<IndexProps, {}> {
           <div style={{ flex: 1.7 }}>
             <Timeline />
           </div>
-          <div style={{ flex: 1 }}>
+          <div style={{ flex: 1 }} className="hide-tablet">
             <h2>{this.props.isDarkMode ? "darkmode" : "lightmode"}</h2>
             <br />
             <Button>
